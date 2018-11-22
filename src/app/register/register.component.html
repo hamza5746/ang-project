@@ -1,0 +1,65 @@
+<div style="padding:50px">
+ <form mehtod="post">
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="fname"> Full Name</label>
+      <input [(ngModel)]="register.fname" type="text" #fname="ngModel" class="form-control" name="fname" id="fname" placeholder="Enter Full Name" required fname>
+ 
+    </div>
+    <div class="form-group col-md-3">
+        <label for="email">Email</label>
+        <input [(ngModel)]="register.email" type="email" #email="ngModel" name="email" class="form-control" id="email" placeholder="Email">
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col-md-3">
+          <label for="inputPassword4">Password</label>
+          <input [(ngModel)]="register.password" type="password" #password="ngModel" name="password" class="form-control" id="inputPassword" placeholder="Password" required>
+        </div>
+     <div class="form-group col-md-3">
+      <label for="inputPassword1">Retype Password</label>
+      <input [(ngModel)]="register.repassword" type="password" #retype="ngModel" name="repassword" (change)="validatepassword()" class="form-control" id="inputPassword1" placeholder="Re-type Password" required>
+    </div>
+    <div *ngIf="register.repassword != register.password">Password must be same</div>
+    
+  </div>
+  <div class="form-row">
+     
+        
+        <div class="form-group col-md-3">
+            <label for="inputAddress"> CNIC</label>
+            <input [(ngModel)]="register.cnic" type="text" class="form-control" #cnic="ngModel" name="cnic" id="cnic" placeholder="42201-XXXXXXX-XX" required>
+          </div>
+       
+          <div class="form-group col-md-3">
+            <label for="gender"> Gender</label>
+            
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" [(ngModel)]="register.gender" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Male
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender"[(ngModel)]="register.gender" id="exampleRadios2" value="option2">
+              <label class="form-check-label" for="exampleRadios2">
+                Female
+              </label>
+            </div>
+          </div>
+       
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCountry">Country</label>
+      <input type="text"  [(ngModel)]="register.country" class="form-control" name="country" id="inputCountry" required>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" [(ngModel)]="register.city" class="form-control" name="city" id="inputCity" required>
+      </div>
+  </div>
+  <button (click)="registerClick()" type="submit" class="btn btn-primary">Register</button>
+</form>
+</div>

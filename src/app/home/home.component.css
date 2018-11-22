@@ -1,0 +1,12 @@
+.image{
+    height:40em; 
+    background-size:cover;
+    width:auto;
+    background-image:url('../../../img/02.jpg');
+    background-position:50% 50%;
+  }
+  .btn-primary{
+    width: 100px;
+    background-color: gray;
+    border: 2px;
+  }
