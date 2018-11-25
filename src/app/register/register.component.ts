@@ -3,8 +3,11 @@ import {MyserviceService} from '../myservice.service';
 import {Router} from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators} from '@angular/forms';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-register',
@@ -31,23 +34,40 @@ note=false;
       });
 
   }
-  registerClick(){
-     try{
-        this.list = this.db.list('/registerations').valueChanges();
-        this.list.forEach(function (data){
-          this.id=data.lastIndexOf;
-          this.id=this.id.id++;
-        });
-      }catch(Exception){
-        this.id=0;
-     }
-        if(this.register.fname !='' && this.register.email !='' && this.register.password !='' && this.register.repassword !=''
+async  registerClick(){
+    
+
+    if(this.register.fname !='' && this.register.email !='' && this.register.password !='' && this.register.repassword !=''
         && this.register.city !='' && this.register.country !='' && this.register.cnic !=''){
             if(this.register.password==this.register.repassword)
               {
-                 this.db.list('/registerations').push({ id:this.id ,fname:this.register.fname,email:this.register.email,password:this.register.password,city:this.register.city,country:this.register.country,cnic:this.register.cnic});
-                //this.authService.registerUser(this.register);
-                this.router.navigate(['/login']);
+                try{
+                      var r = firebase.auth().createUserWithEmailAndPassword(
+                        this.register.email,
+                        this.register.password
+                      );
+                      if(r){  
+                      this.db.list('/registerations').push({
+                         id:firebase.auth().currentUser.uid,
+                         fname:this.register.fname,
+                         email:this.register.email,
+                         password:this.register.password,
+                         city:this.register.city,
+                         country:this.register.country,
+                         cnic:this.register.cnic,
+                         gender:this.register.gender,
+                         role:"User" 
+                        });
+                        alert("Successfully registered");
+                        //this.authService.registerUser(this.register);
+                        this.router.navigate(['/login']);
+                      }
+              }catch(error){
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert(error.message);
+               
+              } 
               }
               else{
                 alert("Password does not match");
