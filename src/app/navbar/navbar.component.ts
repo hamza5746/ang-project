@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  user={fname:"",email:"",password:"",repassword:"",city:"",country:"",cnic:""};
+  user={fname:"",email:"",password:"",city:"",country:"",cnic:""};
   name=null;
   constructor(public authService:MyserviceService,private router:Router) {
     this.user=this.authService.getUser();

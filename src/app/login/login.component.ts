@@ -3,7 +3,7 @@ import {MyserviceService} from '../myservice.service';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
 
 
@@ -17,13 +17,15 @@ export class LoginComponent implements OnInit {
    list:Observable<any[]>;
    dbUser;
   constructor(public authService:MyserviceService,public db: AngularFireDatabase, private router: Router) { 
-    this.dbUser = db.list('/registrations')
+    this.dbUser = db.list('/registerations')
     .valueChanges()
     .subscribe(res => {
       //console.log(res)//should give you the array of percentage. 
       this.dbUser = res;
+      console.log(this.dbUser);
     });
-        console.log(this.dbUser);
+    console.log(this.dbUser);
+    
   }
   
   ngOnInit() {
@@ -35,10 +37,16 @@ export class LoginComponent implements OnInit {
         this.login.email,
         this.login.password
       );
+    
       if(r){
-        for (var id in this.dbUser) {
-          if (firebase.auth().currentUser.uid == this.dbUser[id].id) {
-            if (this.dbUser[id].role == 'User') {
+        
+        for (var key in this.dbUser) {
+           console.log(this.dbUser[key].id); 
+          if (firebase.auth().currentUser.uid == this.dbUser[key].id) {
+           
+            if (this.dbUser[key].role == 'User') {
+              alert("user Login");
+              this.authService.loginUser(this.dbUser[key]);
               this.router.navigate(['/user']);
             }
             else{
@@ -56,7 +64,5 @@ export class LoginComponent implements OnInit {
       alert(error.message);
      
     }
-   this.list=this.db.list("/registrations").valueChanges();//continue
-   this.authService.loginUser(this.login);
   } 
 }

@@ -34,7 +34,7 @@ note=false;
       });
 
   }
-async  registerClick(){
+async registerClick(){
     
 
     if(this.register.fname !='' && this.register.email !='' && this.register.password !='' && this.register.repassword !=''
@@ -42,7 +42,7 @@ async  registerClick(){
             if(this.register.password==this.register.repassword)
               {
                 try{
-                      var r = firebase.auth().createUserWithEmailAndPassword(
+                      var r = await firebase.auth().createUserWithEmailAndPassword(
                         this.register.email,
                         this.register.password
                       );
