@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
             if (this.dbUser[key].role == 'User') {
               alert("user Login");
               this.authService.loginUser(this.dbUser[key]);
+              localStorage.setItem('isLoggedIn', "true");
+              localStorage.setItem('token', this.dbUser[key].id);
+              localStorage.setItem('fname', this.dbUser[key].fname);
+              
               this.router.navigate(['/user']);
             }
             else{

@@ -1,3 +1,4 @@
+<div *ngIf = "userid != ' '">
 <div>
 <div class="alert alert-primary" role="alert" style="text-align:center">
     WELECOME {{userDetail.fname}}
@@ -11,25 +12,24 @@
            <div class="form-group col-md-6">
              <div class="form-group">
                     <label for="exampleFormControlSelect2">Room type</label>
-                    <select  name="roomtype" class="form-control" [(ngModel)]="room.roomType" id="exampleFormControlSelect2">
-                      <option>Standard Room</option>
-                      <option>Sweet Room</option>
-                      <option>Special Room</option>
-                      <option>4</option>
+                    <select  name="roomtype" class="form-control" [(ngModel)]="book.payment" id="exampleFormControlSelect2">
+                      <option value="10000">Standard Room</option>
+                      <option value="15000">Sweat Room</option>
+                      <option value="20000">VIP Room</option>
                     </select>
             </div>
            </div>
                 <div class="form-group col-md-3">
                  <label for="stdate">Start Date</label>
-                    <input [(ngModel)]="room.startDate" type="date" name="stdate" class="form-control" id="stdate" placeholder="Start Date">
+                    <input [(ngModel)]="book.startDate" type="date" name="stdate" class="form-control" id="stdate" placeholder="Start Date">
                 </div>
          
          <div class="form-group col-md-3">
                 <label for="enddate">End Date</label>
-                   <input [(ngModel)]="room.endDate" type="date" name="enddate" class="form-control" id="enddate" placeholder="End Date">
+                   <input [(ngModel)]="book.endDate" type="date" name="enddate" class="form-control" id="enddate" placeholder="End Date">
          </div>
          </div>
-         <button (click)="roomBook(room)" type="submit" class="btn btn-primary">Book</button>
+         <button (click)="roomBook(book)" type="submit" class="btn btn-primary">Book</button>
        </form>
        </div>
     </div>
@@ -37,28 +37,32 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">room No</th>
-                <th scope="col">Name</th>
+                <th scope="col">Room Name</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Pic</th>
+                <th scope="col">Room No</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let rooms of room">
-                <th scope="row">{{rooms.roomNo}}</th>
-                <td>{{userDetail.fname}}</td>
-                <td>{{rooms.startDate}}</td>
-                <td>{{rooms.endDate}}</td>
-                <td>{{payment}}</td>
+              <tr *ngFor="let rooms of book">
+                <td scope="row">{{userDetail.fname}}</td>
+                <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
+                <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+                <td scope="row">{{rooms.payment}}</td>
+                <td scope="row">{{rooms.quantity}}</td>
+                
+                <td scope="row">
+                  <button>Upload</button>
+                </td>
+                <td scope="row">{{rooms.roomNo}}</td>
+                <td scope="row">{{rooms.paymentStatus}}</td>
               </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>Total Payment </td>
-                <td>{{totalPayment}}</td>
-              </tr>
+
             </tbody>
           </table>
     </div>
+  </div>
