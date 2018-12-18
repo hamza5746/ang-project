@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('fname', this.dbUser[key].fname);
 
               //this.router.navigate(['/app']);
-              location.reload();
+              //location.reload();
               this.router.navigate(['/user']);
             }
             else{

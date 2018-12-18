@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MyserviceService} from '../myservice.service';
 import {Router} from '@angular/router';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -13,15 +14,31 @@ export class UserComponent implements OnInit {
   userid="";
   book=[{id:0,regid:"",startDate:"",endDate:"",payment:0,roomNo:"Not Assigned",paymentStatus:"",pic:"",checkout:""}];
   count=0;
- 
+  list:Observable<any[]>;
   totalPayment=0;
-
+  dbBooking; 
   userDetail={fname:"",email:"",password:"",city:"",country:"",cnic:""};
   
   constructor(public db: AngularFireDatabase,public authService:MyserviceService,private router:Router) {
-  this.userDetail=this.authService.getUser();
+    this.dbBooking=db.list('/Bookings')
+    .valueChanges()
+    .subscribe(res => {
+      console.log(res);
+      this.dbBooking = res;
+    });
+    console.log(this.dbBooking);
+    if(this.dbBooking != null){
+      for (var key in this.dbBooking) { // fetching bookings for the users
+        console.log(key); 
+      if (this.userid == this.dbBooking[key].regid) {
+          this.book=this.dbBooking[key];
+          this.count=this.dbBooking[key].id++;
+          console.log(this.dbBooking[key]);
+        }
+      }
+    }
+    this.userDetail=this.authService.getUser();
   }
-
   ngOnInit() {
     
     this.userid = localStorage.getItem('token');
@@ -63,9 +80,9 @@ export class UserComponent implements OnInit {
     }  
   }
   confirmBooking(){
-    this.book.forEach(function (room){
+    for (let room of this.book) {
       this.db.list('/Bookings').push({id:room.id,regid:room.regid,startDate:room.startDate,endDate:room.endDate,payment:room.payment,roomNo:"Not Assigned",paymentStatus:"Not Paid",pic:"",checkout:""});
-    });
+    }
     alert("Successfully registered");
     
   }
