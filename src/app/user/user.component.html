@@ -1,4 +1,6 @@
-<div *ngIf = "userid != ' '">
+<app-navbar></app-navbar>
+
+<div *ngIf = "userid != null">
 <div>
 <div class="alert alert-primary" role="alert" style="text-align:center">
     WELECOME {{userDetail.fname}}
@@ -33,7 +35,7 @@
        </form>
        </div>
     </div>
-    <div *ngIf="totalPayment != 0">
+    <div *ngIf="count != 0">
         <table class="table">
             <thead>
               <tr>
@@ -41,10 +43,10 @@
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Pic</th>
                 <th scope="col">Room No</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -53,16 +55,24 @@
                 <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
                 <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
                 <td scope="row">{{rooms.payment}}</td>
-                <td scope="row">{{rooms.quantity}}</td>
                 
                 <td scope="row">
                   <button>Upload</button>
                 </td>
                 <td scope="row">{{rooms.roomNo}}</td>
                 <td scope="row">{{rooms.paymentStatus}}</td>
+                <td scope="row"><button (click)=deleteroom(rooms.id)>Delete</button></td>
+                
               </tr>
 
             </tbody>
           </table>
+          <button class="btn btn-primary" (click)="confirmBooking()">Room Book</button>
     </div>
+  </div>
+  <div *ngIf = "userid == null">
+    <br/>
+    <br/>
+    
+      <h3 align="center">You have to Login First</h3>
   </div>

@@ -8,7 +8,7 @@ import {MyserviceService} from './myservice.service';
 export class AppComponent {
   title = 'fyp';
   user={};
-  name=""
+  name="";
   constructor(public authService:MyserviceService){
     this.user=this.authService.getUser();
     this.name=this.user["email"];

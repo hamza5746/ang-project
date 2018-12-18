@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
    login={email:"",password:""};
    list:Observable<any[]>;
    dbUser;
-  constructor(public authService:MyserviceService,public db: AngularFireDatabase, private router: Router) { 
+   user;
+   constructor(public authService:MyserviceService,public db: AngularFireDatabase, private router: Router) { 
+    
     this.dbUser = db.list('/registerations')
     .valueChanges()
     .subscribe(res => {
@@ -25,11 +27,13 @@ export class LoginComponent implements OnInit {
       console.log(this.dbUser);
     });
     console.log(this.dbUser);
-    
+   // console.log(this.login.email);
   }
   
   ngOnInit() {
+    localStorage.clear();
     
+    //location.reload();
   }
   async loginClick(){
     try {
@@ -50,7 +54,9 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('isLoggedIn', "true");
               localStorage.setItem('token', this.dbUser[key].id);
               localStorage.setItem('fname', this.dbUser[key].fname);
-              
+
+              //this.router.navigate(['/app']);
+              location.reload();
               this.router.navigate(['/user']);
             }
             else{
