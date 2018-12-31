@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div *ngIf = "userid != null">
+  <div class="alert alert-primary" role="alert" style="text-align:center">
+      Booked Room
+      
+  </div>
+  <br/>
+  <br/>
+  <div class="alert alert-primary" role="alert" style="text-align:center">
+    <button class="btn btn-primary" (click)="rbook()">Reload</button>
+  </div>
+ <div *ngIf = "showtable != ''">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Price</th>
+        <th scope="col">Room No</th>
+        <th scope="col">Pic</th>
+        
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rooms of unpaidrooms">
+        <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
+        <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+        <td scope="row">{{rooms.payment}}</td><td>
+        <input type="file" (change)="onFileChanged($event)">
+      </td>
+        <td scope="row">{{rooms.roomNo}}</td>
+        <td scope="row">
+
+        </td>
+        
+        <td scope="row">{{rooms.paymentStatus}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+</div>  

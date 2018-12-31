@@ -3,6 +3,8 @@ import {MyserviceService} from '../myservice.service';
 import {Router} from '@angular/router';
 import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user',
@@ -16,34 +18,43 @@ export class UserComponent implements OnInit {
   count=0;
   list:Observable<any[]>;
   totalPayment=0;
-  dbBooking; 
+  dbBooking;
   userDetail={fname:"",email:"",password:"",city:"",country:"",cnic:""};
   
   constructor(public db: AngularFireDatabase,public authService:MyserviceService,private router:Router) {
-    this.dbBooking=db.list('/Bookings')
-    .valueChanges()
-    .subscribe(res => {
-      console.log(res);
-      this.dbBooking = res;
-    });
-    console.log(this.dbBooking);
-    if(this.dbBooking != null){
-      for (var key in this.dbBooking) { // fetching bookings for the users
-        console.log(key); 
-      if (this.userid == this.dbBooking[key].regid) {
-          this.book=this.dbBooking[key];
-          this.count=this.dbBooking[key].id++;
-          console.log(this.dbBooking[key]);
-        }
-      }
-    }
+    // this.dbBooking=db.list('/Bookings')
+    // .valueChanges()
+    // .subscribe(res => {
+    //   console.log(res);
+    //   this.dbBooking = res;
+      
+    // });
+    // localStorage.setItem('registeredrooms', this.dbBooking);
+
+
+    //  try{
+  //   if(this.dbBooking != null){
+  //     for (var key=0;key < this.dbBooking.count;key++) { // fetching bookings for the users
+  //      console.log(key); 
+  //     if (this.userid == this.dbBooking[key].regid) {
+  //         this.book=this.dbBooking[key];
+  //         this.count=this.dbBooking[key].id++;
+  //         console.log(this.dbBooking[key]);
+  //       }
+  //     }
+  //   }
+  // }catch(error){
+  //   var errorCode = error.code;
+  //   var errorMessage = error.message;
+  //   alert(error.message);
+  // }
     this.userDetail=this.authService.getUser();
   }
   ngOnInit() {
     
     this.userid = localStorage.getItem('token');
     this.userDetail.fname = localStorage.getItem('fname');
-    console.log(this.userid +" "+this.userDetail.fname );
+    //console.log(this.userid +" "+this.userDetail.fname );
   
   }
   roomBook(room){
@@ -86,4 +97,16 @@ export class UserComponent implements OnInit {
     alert("Successfully registered");
     
   }
+  // rbook(){
+  //   if(this.dbBooking != null){
+  //          for (var key in this.dbBooking) { // fetching bookings for the users
+  //           console.log(key); 
+  //          if (this.userid == this.dbBooking[key].regid) {
+  //              this.book=this.dbBooking[key];
+  //              this.count=this.dbBooking[key].id++;
+  //              console.log(this.dbBooking[key]);
+  //            }
+  //          }
+  //        }
+  // }
 }

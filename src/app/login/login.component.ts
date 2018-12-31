@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.dbUser = db.list('/registerations')
     .valueChanges()
     .subscribe(res => {
-      //console.log(res)//should give you the array of percentage. 
+      console.log(res)//should give you the array of percentage. 
       this.dbUser = res;
       console.log(this.dbUser);
     });
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       if(r){
         
         for (var key in this.dbUser) {
-           console.log(this.dbUser[key].id); 
+           console.log(key); 
           if (firebase.auth().currentUser.uid == this.dbUser[key].id) {
            
             if (this.dbUser[key].role == 'User') {

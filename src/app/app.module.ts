@@ -13,6 +13,9 @@ import { environment } from '../environments/environment';
 import { UserComponent } from './user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { UserroomsComponent } from './userrooms/userrooms.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { CartComponent } from './cart/cart.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyA7LPXmNfhwNRvnvd39AoRG30oZOL5OUgo",
@@ -30,11 +33,13 @@ export const firebaseConfig = {
     RegisterComponent,
     NavbarComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
+    UserroomsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,FormsModule,ReactiveFormsModule,
-    AngularFireModule.initializeApp(firebaseConfig),AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),AngularFireDatabaseModule,NgxSpinnerModule,
     RouterModule.forRoot([{
       path: '',
       component: HomeComponent
@@ -52,6 +57,14 @@ export const firebaseConfig = {
     {
       path: 'user',
       component: UserComponent
+    },
+    {
+      path: 'userrooms',
+      component: UserroomsComponent
+    },
+    {
+      path: 'cart',
+      component: CartComponent
     }
   ])
   ],

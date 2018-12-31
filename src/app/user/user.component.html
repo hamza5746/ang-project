@@ -7,8 +7,7 @@
 </div>
 <br/>
 <br/>
-<h3 style="text-align:center">Previous Booking</h3>
-<div *ngIf="count != 0">
+<!-- <div *ngIf="count != 0">
   <table class="table">
       <thead>
         <tr>
@@ -41,7 +40,7 @@
       </tbody>
     </table>
     <button class="btn btn-primary" (click)="confirmBooking()">Room Book</button>
-</div>
+</div> -->
 <br/>
 <br/>
 <h3 style="text-align:center">Room Booking</h3>
@@ -80,7 +79,6 @@
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col">Price</th>
-                <th scope="col">Pic</th>
                 <th scope="col">Room No</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
@@ -93,9 +91,6 @@
                 <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
                 <td scope="row">{{rooms.payment}}</td>
                 
-                <td scope="row">
-                  <button>Upload</button>
-                </td>
                 <td scope="row">{{rooms.roomNo}}</td>
                 <td scope="row">{{rooms.paymentStatus}}</td>
                 <td scope="row"><button (click)=deleteroom(rooms.id)>Delete</button></td>
@@ -104,7 +99,7 @@
 
             </tbody>
           </table>
-          <button class="btn btn-primary" (click)="confirmBooking()">Room Book</button>
+          <button class="btn btn-primary" (click)="confirmBooking()">Confirm Booking</button>
     </div>
   </div>
   <div *ngIf = "userid == null">

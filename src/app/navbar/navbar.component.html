@@ -34,11 +34,17 @@
   <div *ngIf="userid != null" class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink='#'>{{name}} <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink='#'>{{name}} <span class="sr-only"></span></a>
         </li>
   
         <li class="nav-item">
-          <a class="nav-link" routerLink='#'>Register Room</a>
+          <a class="nav-link" routerLink='../user'>Register Room</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='../userrooms'>Your Rooms</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink='../cart'>Payment</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
