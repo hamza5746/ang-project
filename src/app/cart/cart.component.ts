@@ -17,16 +17,19 @@ export class CartComponent implements OnInit {
   unpaidrooms=[];
   display=true;
   constructor(public db: AngularFireDatabase) {
-    this.dbBooking=db.list('/Bookings')
+    db.list('/Bookings')
     .valueChanges()
     .subscribe(res => {
       console.log(res);
       this.dbBooking = res;
       this.display=false;
+      this.rbook();
     });
+
    }
 
-  ngOnInit() {    this.userid = localStorage.getItem('token');
+  ngOnInit() { 
+       this.userid = localStorage.getItem('token');
 }
   rbook(){
     if(this.dbBooking != null){

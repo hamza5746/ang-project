@@ -54,6 +54,8 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('isLoggedIn', "true");
               localStorage.setItem('token', this.dbUser[key].id);
               localStorage.setItem('fname', this.dbUser[key].fname);
+              localStorage.setItem('role', this.dbUser[key].role);
+              
 
               //this.router.navigate(['/app']);
               //location.reload();
@@ -61,7 +63,10 @@ export class LoginComponent implements OnInit {
             }
             else{
               //admin login
-            alert("Admin Login");
+              localStorage.setItem('token', this.dbUser[key].id);
+              localStorage.setItem('fname', this.dbUser[key].fname);
+              localStorage.setItem('role', this.dbUser[key].role);
+              this.router.navigate(['/admin']);
             }
           }
         }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <div *ngIf = "userid != null">
-<div>
+
 <div class="alert alert-primary" role="alert" style="text-align:center">
     WELECOME {{userDetail.fname}}
 </div>
@@ -43,6 +43,7 @@
 </div> -->
 <br/>
 <br/>
+<div class="container">
 <h3 style="text-align:center">Room Booking</h3>
 <div style="padding:50px">
         <form mehtod="post">
@@ -52,7 +53,7 @@
                     <label for="exampleFormControlSelect2">Room type</label>
                     <select  name="roomtype" class="form-control" [(ngModel)]="book.payment" id="exampleFormControlSelect2">
                       <option value="10000">Standard Room</option>
-                      <option value="15000">Sweat Room</option>
+                      <option value="15000">Sweet Room</option>
                       <option value="20000">VIP Room</option>
                     </select>
             </div>
@@ -70,7 +71,7 @@
          <button (click)="roomBook(book)" type="submit" class="btn btn-primary">Book</button>
        </form>
        </div>
-    </div>
+ 
     <div *ngIf="count != 0">
         <table class="table">
             <thead>
@@ -90,7 +91,6 @@
                 <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
                 <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
                 <td scope="row">{{rooms.payment}}</td>
-                
                 <td scope="row">{{rooms.roomNo}}</td>
                 <td scope="row">{{rooms.paymentStatus}}</td>
                 <td scope="row"><button (click)=deleteroom(rooms.id)>Delete</button></td>
@@ -102,9 +102,10 @@
           <button class="btn btn-primary" (click)="confirmBooking()">Confirm Booking</button>
     </div>
   </div>
+  </div>
   <div *ngIf = "userid == null">
     <br/>
     <br/>
-    
-      <h3 align="center">You have to Login First</h3>
+     <h3 align="center">You have to Login First</h3>
   </div>
+  

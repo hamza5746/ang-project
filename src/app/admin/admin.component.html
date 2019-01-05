@@ -1,0 +1,154 @@
+<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+    
+    </style>
+<app-navbar></app-navbar>
+<div *ngIf = "userid != null">
+  <div class="alert alert-primary" role="alert" style="text-align:center">
+      User Rooms
+      
+  </div>
+  <br/>
+  <br/>
+<div class="container">
+      
+  <!-- <div class="alert alert-primary" role="alert" style="text-align:center">
+    <button class="btn btn-primary" (click)="rbook()">Reload</button>
+  </div> -->
+
+  <div id="loader" *ngIf="display == false">
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+</div>
+ <div>
+        
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Price</th>
+        <th scope="col">Room No</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rooms of userrooms">
+        <td scope="row">{{rooms.userName}}</td>
+        <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
+        <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+        <td scope="row">{{rooms.payment}}</td>
+        <td scope="row">
+          <input type="text" name="roomno" (change)="roomchange(rooms.roomno)" [(ngModel)]="rooms.roomno" max="3"/>
+          <div *ngIf="available == false">
+             <p style="color:red">Room is already Booked</p>
+          </div>
+          <div *ngIf="inputroom == false">
+              <p style="color:red">Room No should be assigned</p>
+           </div>
+        </td>
+        <td scope="row">{{rooms.paymentStatus}}</td>
+        <td scope="row">
+            
+            <button class="btn btn-primary" (click)="paidroom(rooms)" [disabled]="!pbutton">Paid</button>
+        </td>
+      
+        
+      </tr>
+    
+    </tbody>
+  </table>
+
+</div>
+<div *ngIf="userpaidrooms != null">
+    <h2>Paid Rooms</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Price</th>
+            <th scope="col">Room No</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr scope="row" *ngFor="let rooms of userpaidrooms">
+            <td scope="col">{{rooms.userName}}</td>
+            <td scope="col">{{rooms.startDate}} &nbsp; 12:00 pm</td>
+            <td scope="col">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+            <td scope="col">{{rooms.payment}}</td>
+            <td scope="col">
+                {{rooms.roomno}}
+            </td>
+            <td scope="col">{{rooms.paymentStatus}}</td>
+          </tr>
+          <tr scope="row">
+               <td scope="col"></td>
+               <td scope="col"></td>
+               <td scope="col"></td>
+              
+              <td scope="col">Total Amount : {{totalPaid}}</td>
+          </tr>
+        </tbody>
+      </table>
+    
+
+</div>
+</div>  
+</div>
+<div *ngIf = "userid == null">
+    <br/>
+    <br/>
+     <h3 align="center">You have to Login First</h3>
+</div>

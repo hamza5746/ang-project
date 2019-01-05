@@ -16,18 +16,21 @@ export class UserroomsComponent implements OnInit {
    dbBooking;
    showtable="";
    userrooms=[]; 
-   display=true;
+   display=false;
+   myVar;
    constructor(public db: AngularFireDatabase, public spinner: NgxSpinnerService) {
    // this.dbBooking = localStorage.getItem('registeredrooms');
   // console.log(this.dbBooking); 
-   this.dbBooking=db.list('/Bookings')
+  
+  db.list('/Bookings')
    .valueChanges()
    .subscribe(res => {
      console.log(res);
      this.dbBooking = res;
-     this.display==false;
-   });
-   console.log(this.dbBooking[0]);
+     this.rbook();
+    // this.myVar = setTimeout(this.rbook, 3000);
+     
+    });
   }
 
   ngOnInit() {
@@ -35,8 +38,9 @@ export class UserroomsComponent implements OnInit {
           
   }
   rbook(){
-     if(this.dbBooking != null){
-      this.showtable="true";
+
+    if(this.dbBooking != null){
+      
            for (var key in this.dbBooking) { // fetching bookings for the users
             if (this.userid == this.dbBooking[key].regid) {
                 //this.book=this.dbBooking[key];
@@ -50,5 +54,6 @@ export class UserroomsComponent implements OnInit {
         }
 
   }
+
 
 }

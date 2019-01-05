@@ -16,6 +16,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { UserroomsComponent } from './userrooms/userrooms.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CartComponent } from './cart/cart.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyA7LPXmNfhwNRvnvd39AoRG30oZOL5OUgo",
@@ -35,7 +36,8 @@ export const firebaseConfig = {
     HomeComponent,
     UserComponent,
     UserroomsComponent,
-    CartComponent
+    CartComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,FormsModule,ReactiveFormsModule,
@@ -65,6 +67,10 @@ export const firebaseConfig = {
     {
       path: 'cart',
       component: CartComponent
+    },
+    {
+      path: 'admin',
+      component: AdminComponent
     }
   ])
   ],
