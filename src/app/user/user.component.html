@@ -3,7 +3,7 @@
 <div *ngIf = "userid != null">
 
 <div class="alert alert-primary" role="alert" style="text-align:center">
-    WELECOME {{userDetail.fname}}
+    WELECOME {{name}}
 </div>
 <br/>
 <br/>
@@ -46,29 +46,43 @@
 <div class="container">
 <h3 style="text-align:center">Room Booking</h3>
 <div style="padding:50px">
-        <form mehtod="post">
+        <form #form="ngForm" (ngSubmit)="roomBook(form)">
          <div class="form-row">
            <div class="form-group col-md-6">
              <div class="form-group">
                     <label for="exampleFormControlSelect2">Room type</label>
-                    <select  name="roomtype" class="form-control" [(ngModel)]="book.payment" id="exampleFormControlSelect2">
+                    <select  name="payment" ngModel class="form-control" #payment="ngModel" required>
                       <option value="10000">Standard Room</option>
                       <option value="15000">Sweet Room</option>
                       <option value="20000">VIP Room</option>
                     </select>
+                      <div *ngIf="payment.errors?.required">  
+                      <p style="color:red"> Select Room Type </p>
+                    </div>
             </div>
            </div>
                 <div class="form-group col-md-3">
                  <label for="stdate">Start Date</label>
-                    <input [(ngModel)]="book.startDate" type="date" name="stdate" class="form-control" id="stdate" placeholder="Start Date">
-                </div>
+                    <input ngModel #startDate="ngModel" type="date" name="startDate" class="form-control"  required>
+                   
+                    <div *ngIf="startDate.errors?.required">
+                      <p style="color:red"> Start Date is required </p>
+                  </div>
+                  </div>
          
          <div class="form-group col-md-3">
                 <label for="enddate">End Date</label>
-                   <input [(ngModel)]="book.endDate" type="date" name="enddate" class="form-control" id="enddate" placeholder="End Date">
+                   <input ngModel #endDate="ngModel"type="date" name="endDate" class="form-control"id="endDate" required>
+
+                   <div *ngIf="endDate.errors?.required">
+                    <p style="color:red">End Date is required </p>
+                   </div>
+                    
+
+                     
+          </div>
          </div>
-         </div>
-         <button (click)="roomBook(book)" type="submit" class="btn btn-primary">Book</button>
+         <button  type="submit" class="btn btn-primary" [disabled]="!form.valid">Book</button>
        </form>
        </div>
  
@@ -79,22 +93,24 @@
                 <th scope="col">Room Name</th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
+                <th scope="col">Room Type</th>
                 <th scope="col">Price</th>
                 <th scope="col">Room No</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr *ngFor="let rooms of book">
-                <td scope="row">{{userDetail.fname}}</td>
+            <tbody *ngIf="book[0].id !=0">
+              <tr *ngFor="let rooms of book" >
+             
+                <td scope="row">{{name}}</td>
                 <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
                 <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+                <td scope="row">{{rooms.pic}}</td>
                 <td scope="row">{{rooms.payment}}</td>
                 <td scope="row">{{rooms.roomNo}}</td>
                 <td scope="row">{{rooms.paymentStatus}}</td>
                 <td scope="row"><button (click)=deleteroom(rooms.id)>Delete</button></td>
-                
               </tr>
 
             </tbody>
@@ -108,4 +124,3 @@
     <br/>
      <h3 align="center">You have to Login First</h3>
   </div>
-  

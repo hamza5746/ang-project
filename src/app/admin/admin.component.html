@@ -75,6 +75,8 @@
         <th scope="col">Name</th>
         <th scope="col">Start Date</th>
         <th scope="col">End Date</th>
+        <th scope="col">Room Type</th>
+        
         <th scope="col">Price</th>
         <th scope="col">Room No</th>
         <th scope="col">Status</th>
@@ -86,9 +88,11 @@
         <td scope="row">{{rooms.userName}}</td>
         <td scope="row">{{rooms.startDate}} &nbsp; 12:00 pm</td>
         <td scope="row">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+        <td scope="row">{{rooms.pic}}</td>
+        
         <td scope="row">{{rooms.payment}}</td>
         <td scope="row">
-          <input type="text" name="roomno" (change)="roomchange(rooms.roomno)" [(ngModel)]="rooms.roomno" max="3"/>
+          <input type="text" name="roomno"  (keypress)="numberOnly($event)" (change)="roomchange(rooms)" [(ngModel)]="rooms.roomno" maxlength="3"/>
           <div *ngIf="available == false">
              <p style="color:red">Room is already Booked</p>
           </div>
@@ -117,6 +121,7 @@
             <th scope="col">Name</th>
             <th scope="col">Start Date</th>
             <th scope="col">End Date</th>
+            <th scope="col">Room Type</th>
             <th scope="col">Price</th>
             <th scope="col">Room No</th>
             <th scope="col">Status</th>
@@ -127,6 +132,7 @@
             <td scope="col">{{rooms.userName}}</td>
             <td scope="col">{{rooms.startDate}} &nbsp; 12:00 pm</td>
             <td scope="col">{{rooms.endDate}} &nbsp; 12:00 pm </td>
+            <td scope="col">{{rooms.pic}}</td>
             <td scope="col">{{rooms.payment}}</td>
             <td scope="col">
                 {{rooms.roomno}}

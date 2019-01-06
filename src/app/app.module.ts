@@ -17,7 +17,7 @@ import { UserroomsComponent } from './userrooms/userrooms.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CartComponent } from './cart/cart.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { DatePipe } from '@angular/common';
 export const firebaseConfig = {
     apiKey: "AIzaSyA7LPXmNfhwNRvnvd39AoRG30oZOL5OUgo",
     authDomain: "hotelms-252e9.firebaseapp.com",
@@ -74,7 +74,9 @@ export const firebaseConfig = {
     }
   ])
   ],
-  providers: [MyserviceService],
+  providers: [MyserviceService,DatePipe],
+  
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

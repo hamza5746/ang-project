@@ -56,10 +56,11 @@ export class AdminComponent implements OnInit {
                     startDate:this.dbBooking[booked].startDate,
                     endDate:this.dbBooking[booked].endDate,
                     payment:this.dbBooking[booked].payment,
-                    roomno:this.dbBooking[booked].roomNo,
+                    roomno:"",
                     paymentStatus:this.dbBooking[booked].paymentStatus,
                     regid:this.dbBooking[booked].regid,
-                    id:this.dbBooking[booked].id
+                    id:this.dbBooking[booked].id,
+                    pic:this.dbBooking[booked].pic
                   });   
               }
               else if(this.dbBooking[booked].paymentStatus=="Paid"){
@@ -73,7 +74,8 @@ export class AdminComponent implements OnInit {
                         roomno:this.dbBooking[booked].roomNo,
                         paymentStatus:this.dbBooking[booked].paymentStatus,
                         regid:this.dbBooking[booked].regid,
-                        id:this.dbBooking[booked].id
+                        id:this.dbBooking[booked].id,
+                        pic:this.dbBooking[booked].pic
                       });   
                   }
            }
@@ -96,16 +98,20 @@ export class AdminComponent implements OnInit {
     // this..snapshot.params['id'];
     location.reload(); 
   }
-  roomchange(roomno){
+  roomchange(room){
     for (var bookedroom in this.userpaidrooms) { // fetching bookings for the users
       console.log(this.userpaidrooms[bookedroom].roomno);
-      if(this.userpaidrooms[bookedroom].roomno==roomno && this.userpaidrooms[bookedroom].paymentStatus=="Paid"){
+      if(this.userpaidrooms[bookedroom].roomno==room.roomno && this.userpaidrooms[bookedroom].paymentStatus=="Paid"
+       && room.startDate >= this.userpaidrooms[bookedroom].startDate || room.endDate <= this.userpaidrooms[bookedroom].endDate){
           this.available=false;
           this.pbutton=false;
           break; 
         }
-      if(roomno == "Not Assigned" || roomno==""){
+      if(room.roomno == "Not Assigned" || room.roomno==""){
           this.inputroom=false;
+          this.pbutton=false;
+          this.available=true;  
+          
           break
         }
         else{
@@ -115,6 +121,15 @@ export class AdminComponent implements OnInit {
         
       }  
     }  
+  }
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      //this.pbutton=false;
+      return false;
+    }
+    return true;
+
   }
   
 }
